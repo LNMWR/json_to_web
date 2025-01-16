@@ -146,7 +146,7 @@
             const keys = Array.from(document.querySelectorAll('.key'))
                 .map(k => k.getAttribute('data-original-key'));
             const values = Array.from(document.querySelectorAll('.value'))
-                .map(v => v.textContent);
+                .map(v => v.textContent.trimStart()); // 去除开头的空格
             
             const newJson = {};
             keys.forEach((key, index) => {
