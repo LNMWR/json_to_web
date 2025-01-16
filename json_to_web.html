@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON处理工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .button-group {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .json-pair {
+            display: flex;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .key {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 150px;
+        }
+
+        .value {
+            flex-grow: 1;
+        }
+
+        #jsonInput {
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #preview {
+            white-space: pre-wrap;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON处理工具</h1>
+        
+        <div class="button-group">
+            <input type="file" id="fileInput" accept=".json" style="display: none;">
+            <button onclick="document.getElementById('fileInput').click()">导入JSON</button>
+            <button onclick="combineJSON()">拼接JSON</button>
+            <button onclick="exportJSON()">导出JSON</button>
+        </div>
+
+        <div id="jsonContainer"></div>
+        
+        <h3>预览：</h3>
+        <div id="preview"></div>
+    </div>
+
+    <script>
+        let originalJson = {};
+        
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    originalJson = JSON.parse(e.target.result);
+                    displayJSON(originalJson);
+                } catch (error) {
+                    alert('JSON格式错误！');
+                }
+            };
+            
+            reader.readAsText(file);
+        });
+
+        function displayJSON(json) {
+            const container = document.getElementById('jsonContainer');
+            container.innerHTML = '';
+            
+            Object.entries(json).forEach(([key, value]) => {
+                const div = document.createElement('div');
+                div.className = 'json-pair';
+                div.innerHTML = `
+                    <span class="key" data-original-key="${key}">${key}:</span>
+                    <span class="value">${value}</span>
+                `;
+                container.appendChild(div);
+            });
+        } 
+        function combineJSON() {
+            const keys = Array.from(document.querySelectorAll('.key'))
+                .map(k => k.getAttribute('data-original-key'));
+            const values = Array.from(document.querySelectorAll('.value'))
+                .map(v => v.textContent);
+            
+            const newJson = {};
+            keys.forEach((key, index) => {
+                newJson[key] = values[index];
+            });
+            
+            document.getElementById('preview').textContent = 
+                JSON.stringify(newJson, null, 2);
+        }
+
+        function exportJSON() {
+            const jsonStr = document.getElementById('preview').textContent;
+            if (!jsonStr) {
+                alert('请先点击拼接JSON按钮生成预览！');
+                return;
+            }
+            
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'exported.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html> 
