@@ -26,7 +26,7 @@ Please provide attribution when modifying or redistributing this tool.
 
 ---
 
-### `json_to_web`
+### `json在线工具`
 
 **痛点：**
 
@@ -34,7 +34,8 @@ Please provide attribution when modifying or redistributing this tool.
 
 **解决方案：**
 
-这个工具允许你上传JSON文件，隐藏掉key，并通过Chrome插件利用LLM进行翻译。翻译完成后，工具会将翻译内容重新拼接回原始的key，并且允许你下载更新后的JSON文件。
+这个工具允许你上传JSON文件，隐藏掉key，并通过Chrome插件（此处推荐沉浸式翻译）利用LLM进行翻译。翻译完成后，工具会将翻译内容重新拼接回原始的key，并且允许你下载更新后的JSON文件。
+![image](https://github.com/user-attachments/assets/664a3b05-4869-475a-9269-b32aa2381e4d)
 
 **特点：**
 - 免费且开源
@@ -45,7 +46,7 @@ Please provide attribution when modifying or redistributing this tool.
 https://jsontoweb.vercel.app/
 
 **贡献者：**  
-protea, chatgpt-o1
+Protea, chatgpt-o1
 
 **许可证：**  
 修改和传播时请署名。
