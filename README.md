@@ -19,7 +19,7 @@ This tool allows you to upload a JSON file, hide the keys, and then use a Chrome
 https://jsontoweb.vercel.app/
 
 **Contributors:**  
-protea, chatgpt-o1
+Protea, ChatGPT-o1
 
 **License:**  
 Please provide attribution when modifying or redistributing this tool.
@@ -46,7 +46,7 @@ Please provide attribution when modifying or redistributing this tool.
 https://jsontoweb.vercel.app/
 
 **贡献者：**  
-Protea, chatgpt-o1
+Protea, ChatGPT-o1
 
 **许可证：**  
 修改和传播时请署名。
