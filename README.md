@@ -12,6 +12,8 @@ This tool allows you to upload a JSON file, hide the keys, and then use a Chrome
 - Free and open-source
 - No data storage for your privacy
 - Ensures complete translations without missing any parts
+![image](https://github.com/user-attachments/assets/9159df10-97f1-4951-aac0-4db4f98c46c4)
+
 
 **Online Access:**  
 https://jsontoweb.vercel.app/
